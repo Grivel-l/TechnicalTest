@@ -1,7 +1,11 @@
-/* import {fork} from "redux-saga/effects" */
+import {all, fork} from "redux-saga/effects";
+
+import auth from "./auth";
 
 function* root() {
-  yield [];
+  yield all([
+    fork(auth)
+  ]);
 }
 
 export default root;

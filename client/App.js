@@ -10,6 +10,7 @@ import {
 
 import sagas from "./app/sagas/";
 import reducers from "./app/reducers/";
+import Auth from "./app/containers/auth/auth";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,9 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={this.store}>
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-        </View>
+        <Auth />
       </Provider>
     );
   }

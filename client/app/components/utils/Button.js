@@ -6,7 +6,7 @@ import {
   TouchableNativeFeedback
 } from "react-native";
 
-class Button extends React.component {
+class Button extends React.Component {
   render() {
     return (
       <TouchableNativeFeedback onPress={this.props.onPress}>
@@ -23,9 +23,12 @@ const styles = {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    maxHeight: 100
+    maxHeight: 100,
+    backgroundColor: "#e0e0e0",
+    margin: 10,
+    borderRadius: 5
   }
 };
 
-export default Auth;
+export default Button;
 
