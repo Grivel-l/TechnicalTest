@@ -1,12 +1,35 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {Provider} from "react-redux";
+import createSagaMiddleware from "redux-saga";
+import {createStore, applyMiddleware} from "redux";
+import {
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
+
+import sagas from "./app/sagas/";
+import reducers from "./app/reducers/";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const sagaMiddleware = createSagaMiddleware();
+    this.store = createStore(
+      reducers,
+      applyMiddleware(sagaMiddleware)
+    );
+    sagaMiddleware.run(sagas);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={this.store}>
+        <View style={styles.container}>
+          <Text>Open up App.js to start working on your app!</Text>
+        </View>
+      </Provider>
     );
   }
 }
