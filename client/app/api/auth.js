@@ -1,7 +1,6 @@
 import config from "../../config/general";
 
 export const loginApi = payload => {
-  console.log("HelloWorld");
   return fetch(`${config.apiEndpoint}auth/login?username=${payload.username}&password=${payload.password}`)
     .then(response => response.json())
     .catch(e => ({e, error: true}));

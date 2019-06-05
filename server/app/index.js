@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 mongoose.set("useCreateIndex", true);
 mongoose.connection.on("connected", () => {
-  console.log("Connected to database");
+  console.info("Connected to database");
   try {
     app.use((req, res, next) => {
       if (req.path === "/auth/register" || req.path === "/auth/login") {
@@ -30,7 +30,7 @@ mongoose.connection.on("connected", () => {
 });
 
 app.listen(3000, () => {
-  console.log("Server is running");
+  console.info("Server is running");
   (function connectDtb() {
     mongoose.connect("mongodb://localhost/TechnicalTest", {useNewUrlParser: true})
       .catch(error => {

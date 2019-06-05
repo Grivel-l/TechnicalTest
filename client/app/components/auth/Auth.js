@@ -29,13 +29,11 @@ class Auth extends React.Component {
   }
 
   renderContent() {
-    console.log("render content: ", this.props);
     if (this.props.authToken === null) {
-      console.log("Error: ", this.props.error);
       return (
         <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
           <Modal
-            animationType="slide"
+            animationType={"slide"}
             visible={this.state.modal}
             onRequestClose={() => this.setState({modal: false})}
           >
