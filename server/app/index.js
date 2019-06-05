@@ -14,6 +14,15 @@ mongoose.set("useCreateIndex", true);
 mongoose.connection.on("connected", () => {
   console.log("Connected to database");
   try {
+    app.use((req, res, next) => {
+      if (req.path === "/auth/register" || req.path === "/auth/login") {
+        return next();
+      }
+      if (req.query.authToken === undefined || connectedUsers[req.query.authToken] === undefined) {
+        return res.status(403).send({error: "Forbidden"});
+      }
+      next();
+    });
     loadRoutes(app, connectedUsers);
   } catch (error) {
     console.error(`Couldn't load routes: ${error}`);

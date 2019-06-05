@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 
 import Form from "./Form";
 import Button from "../utils/Button";
+import Homescreen from "../../containers/homescreen/homescreen";
 
 class Auth extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Auth extends React.Component {
   }
 
   renderContent() {
+    console.log("render content: ", this.props);
     if (this.props.authToken === null) {
       console.log("Error: ", this.props.error);
       return (
@@ -51,7 +53,7 @@ class Auth extends React.Component {
         </View>
       );
     } else {
-      return <View />;
+      return <Homescreen authToken={this.props.authToken} />;
     }
   }
 
