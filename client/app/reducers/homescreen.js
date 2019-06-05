@@ -11,7 +11,6 @@ const initialState = {
 const homescreen = (state = initialState, {type, payload}) => {
   switch(type) {
   case CATS_GET_SUCCESS:
-    console.log("Okay here\n", payload);
     return {
       ...state,
       cats: payload
