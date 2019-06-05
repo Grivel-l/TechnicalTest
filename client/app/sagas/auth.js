@@ -21,9 +21,10 @@ function* login({payload}) {
 function* register({payload}) {
   const result = yield call(registerApi, payload);
   if (result.error === undefined) {
-    put(AUTH_SUCCESS, result);
+    console.log("Sending success...\n");
+    yield put({payload: result, type: AUTH_SUCCESS});
   } else {
-    put(AUTH_ERROR);
+    yield put({type: AUTH_ERROR});
   }
 }
 

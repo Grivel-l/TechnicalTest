@@ -1,8 +1,8 @@
 import config from "../../config/general";
 
 export const loginApi = payload => {
-  console.log("Payload: ", payload);
   return fetch(`${config.apiEndpoint}auth/login`)
+    .then(response => response.json())
     .catch(e => ({e, error: true}));
 };
 
@@ -14,6 +14,7 @@ export const registerApi = payload => {
     },
     body: JSON.stringify(payload)
   })
+    .then(response => response.json())
     .catch(e => ({e, error: true}));
 };
 

@@ -26,24 +26,36 @@ class Auth extends React.Component {
     });
   }
 
+  renderContent() {
+    if (this.props.authToken === null) {
+      return (
+        <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
+          <Modal
+            animationType="slide"
+            visible={this.state.modal}
+            onRequestClose={() => this.setState({modal: false})}
+          >
+            {this.state.modal && <Form action={this.props[this.action]} />}
+          </Modal>
+          <Button
+            content={"Register"}
+            onPress={() => this.openModal("register")}
+          />
+          <Button
+            content={"Login"}
+            onPress={() => this.openModal("login")}
+          />
+        </View>
+      );
+    } else {
+      return <View />;
+    }
+  }
+
   render() {
     return (
       <View style={styles.wrapper}>
-        <Modal
-          animationType="slide"
-          visible={this.state.modal}
-          onRequestClose={() => this.setState({modal: false})}
-        >
-          {this.state.modal && <Form action={this.props[this.action]} />}
-        </Modal>
-        <Button
-          content={"Register"}
-          onPress={() => this.openModal("register")}
-        />
-        <Button
-          content={"Login"}
-          onPress={() => this.openModal("login")}
-        />
+        {this.renderContent()}
       </View>
     );
   }
@@ -61,7 +73,7 @@ const styles = {
 Auth.propTypes = {
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  connected: PropTypes.string
+  authToken: PropTypes.string
 };
 
 export default Auth;

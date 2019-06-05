@@ -8,7 +8,7 @@ import Auth from "../../components/auth/Auth";
 
 const mapStateToProps = ({auth}) => {
   return {
-    connected: auth.authToken
+    authToken: auth.authToken
   };
 };
 
