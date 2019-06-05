@@ -1,9 +1,10 @@
 import React from "react";
 import {
   Stylesheet,
-  View,
+  ScrollView,
   Modal,
-  Text
+  Text,
+  Image
 } from "react-native";
 import PropTypes from "prop-types";
 
@@ -16,24 +17,29 @@ class Homescreen extends React.Component {
   }
 
   renderCats() {
-    console.log("Rendering cats: ", this.props.cats);
-    return (<View />);
+    console.log("this.props: ",this.props);
+    return this.props.cats.map((cat, index) => {
+      return (
+        <Image
+          source={{uri: cat}}
+          style={{minHeight: 300}}
+          key={`cat${index}`}
+        />
+      );
+    });
   }
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <ScrollView contentContainerStyle={styles.wrapper}>
         {this.renderCats()}
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = {
   wrapper: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "center"
   }
 };
 

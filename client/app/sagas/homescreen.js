@@ -14,9 +14,9 @@ import {getCatsApi} from "../api/homescreen";
 
 function* getCats({payload}) {
   const result = yield call(getCatsApi, {authToken: payload});
-  console.log("Got cats: ", result);
   if (result.error === undefined) {
-    yield put({payload: result, type: CATS_GET_SUCCESS});
+    console.log("Result: ", result);
+    yield put({payload: result.cats, type: CATS_GET_SUCCESS});
   } else {
     yield put({type: CATS_GET_ERROR, payload: result.error});
   }
