@@ -23,10 +23,14 @@ class AuthController {
       .then(() => this.createToken(username, connectedUsers));
   }
 
-  connectUser(username, password) {
+  connectUser(username, password, connectedUsers) {
     return this.model.getUser(username, this.encrypt(password))
       .then(user => {
-        console.log("User: ", user);
+        if (user.length > 0) {
+          return this.createToken(username, connectedUsers);
+        } else {
+          return Promise.reject({status: 403});
+        }
       });
   }
 }

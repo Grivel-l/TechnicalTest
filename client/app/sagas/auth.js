@@ -15,16 +15,19 @@ import {loginApi, registerApi} from "../api/auth";
 
 function* login({payload}) {
   const result = yield call(loginApi, payload);
-  console.log("Login: ", result);
+  if (result.error === undefined) {
+    yield put({payload: result, type: AUTH_SUCCESS});
+  } else {
+    yield put({type: AUTH_ERROR, payload: result.error});
+  }
 }
 
 function* register({payload}) {
   const result = yield call(registerApi, payload);
   if (result.error === undefined) {
-    console.log("Sending success...\n");
     yield put({payload: result, type: AUTH_SUCCESS});
   } else {
-    yield put({type: AUTH_ERROR});
+    yield put({type: AUTH_ERROR, payload: result.error});
   }
 }
 

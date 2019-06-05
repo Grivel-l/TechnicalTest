@@ -8,7 +8,8 @@ import Auth from "../../components/auth/Auth";
 
 const mapStateToProps = ({auth}) => {
   return {
-    authToken: auth.authToken
+    authToken: auth.authToken,
+    error: auth.error
   };
 };
 

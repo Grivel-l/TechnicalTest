@@ -6,11 +6,18 @@ module.exports = (app, connectedUsers) => {
       .then(result => res.status(200).send(result))
       .catch(error => {
         console.error(`An error occured: ${error}`);
-        return res.status(500).send({error: "An unknow error occured"});
+        return res.status(500).send({error: "An unknown error occured"});
       });
   });
-  app.get("/auth/connect", (req, res) => {
-    console.log(req.params);
-    return res.status(200).send({});
+  app.get("/auth/login", (req, res) => {
+    return AuthController.connectUser(req.query.username, req.query.password, connectedUsers)
+      .then(result => res.status(200).send(result))
+      .catch(error => {
+        if (error.status === 403) {
+          return res.status(403).send({error: "Forbidden"});
+        }
+        console.error(`An error occured: ${error}`);
+        return res.status(500).send({error: "An unknown error occured"});
+      });
   });
 };

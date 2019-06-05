@@ -2,7 +2,8 @@ import React from "react";
 import {
   Stylesheet,
   View,
-  Modal
+  Modal,
+  Text
 } from "react-native";
 import PropTypes from "prop-types";
 
@@ -28,6 +29,7 @@ class Auth extends React.Component {
 
   renderContent() {
     if (this.props.authToken === null) {
+      console.log("Error: ", this.props.error);
       return (
         <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
           <Modal
@@ -36,6 +38,7 @@ class Auth extends React.Component {
             onRequestClose={() => this.setState({modal: false})}
           >
             {this.state.modal && <Form action={this.props[this.action]} />}
+            <Text style={{color: "red", textAlign: "center"}}>{this.props.error}</Text>
           </Modal>
           <Button
             content={"Register"}
@@ -73,7 +76,8 @@ const styles = {
 Auth.propTypes = {
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  authToken: PropTypes.string
+  authToken: PropTypes.string,
+  error: PropTypes.string
 };
 
 export default Auth;

@@ -1,7 +1,11 @@
-import {AUTH_SUCCESS} from "../actions/auth";
+import {
+  AUTH_SUCCESS,
+  AUTH_ERROR
+} from "../actions/auth";
 
 const initialState = {
-  authToken: null
+  authToken: null,
+  error: null
 };
 
 const auth = (state = initialState, {type, payload}) => {
@@ -10,6 +14,11 @@ const auth = (state = initialState, {type, payload}) => {
     return {
       ...state,
       authToken: payload.token
+    };
+  case AUTH_ERROR:
+    return {
+      ...state,
+      error: payload
     };
   default:
     return state;
